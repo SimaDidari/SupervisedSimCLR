@@ -1,0 +1,17 @@
+import cv2 
+
+
+def crop_top(img, percent=0.15):
+    offset = int(img.shape[0] * percent)
+    return img[offset:]
+
+def central_crop(img):
+    size = min(img.shape[0], img.shape[1])
+    offset_h = int((img.shape[0] - size) / 2)
+    offset_w = int((img.shape[1] - size) / 2)
+    return img[offset_h:offset_h + size, offset_w:offset_w + size]
+
+def process_image_file(img, top_percent):
+    img = crop_top(img, percent=top_percent)
+    img = central_crop(img)
+    return img
